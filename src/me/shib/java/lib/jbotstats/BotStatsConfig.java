@@ -2,9 +2,13 @@ package me.shib.java.lib.jbotstats;
 
 public class BotStatsConfig {
 
-    private String botStatClassName;
+    private String botStatsClassName;
 
-    public String getBotStatClassName() {
-        return botStatClassName;
+    public BotStatsConfig(Class<JBotStats> botStatsClass) {
+        this.botStatsClassName = botStatsClass.getName();
+    }
+
+    public String getBotStatsClassName() {
+        return botStatsClassName;
     }
 }

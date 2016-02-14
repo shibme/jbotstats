@@ -2,6 +2,8 @@ package me.shib.java.lib.jbotstats;
 
 import me.shib.java.lib.jtelebot.types.*;
 
+import java.util.Map;
+
 public abstract class JBotStats {
     public JBotStats(BotStatsConfig botStatsConfig) {
     }
@@ -36,5 +38,5 @@ public abstract class JBotStats {
 
     public abstract void onSendingChatAction(ChatId chat_id, ChatAction action, boolean response);
 
-    public abstract void onUnknownData(Object[] objects);
+    public abstract void onOtherData(String methodName, Map<String, Object> objectMap);
 }

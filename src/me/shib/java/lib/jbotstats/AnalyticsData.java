@@ -19,15 +19,19 @@ public class AnalyticsData {
         objectMap.put(key, value);
     }
 
-    public Object getValue(String key) {
+    protected Object getValue(String key) {
         return objectMap.get(key);
     }
 
-    public String getMethodName() {
+    protected String getMethodName() {
         return methodName;
     }
 
-    public Object getReturned() {
+    protected Object getReturned() {
         return returned;
+    }
+
+    protected Map<String, Object> getObjectMap() {
+        return objectMap;
     }
 }

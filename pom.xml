@@ -147,7 +147,7 @@
     <dependencies>
         <dependency>
             <groupId>me.shib.java.lib</groupId>
-            <artifactId>jtelebot</artifactId>
+            <artifactId>jtelebot-models</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>

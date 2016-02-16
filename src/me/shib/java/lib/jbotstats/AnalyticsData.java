@@ -1,5 +1,6 @@
 package me.shib.java.lib.jbotstats;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,12 +8,14 @@ public class AnalyticsData {
 
     private String methodName;
     private Object returned;
+    private IOException ioException;
     private Map<String, Object> objectMap;
 
-    public AnalyticsData(String methodName, Object returned) {
+    public AnalyticsData(String methodName, Object returned, IOException ioException) {
         this.methodName = methodName;
         this.returned = returned;
-        objectMap = new HashMap<>();
+        this.ioException = ioException;
+        this.objectMap = new HashMap<>();
     }
 
     public void setValue(String key, Object value) {
@@ -29,6 +32,10 @@ public class AnalyticsData {
 
     protected Object getReturned() {
         return returned;
+    }
+
+    protected IOException getIoException() {
+        return ioException;
     }
 
     protected Map<String, Object> getObjectMap() {

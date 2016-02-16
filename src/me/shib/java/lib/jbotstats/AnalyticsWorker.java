@@ -3,6 +3,7 @@ package me.shib.java.lib.jbotstats;
 import me.shib.java.lib.jtelebot.types.*;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -205,54 +206,55 @@ public class AnalyticsWorker extends Thread {
                 InlineQueryResult[] results = getInlineQueryResults(analyticsData.getValue("results"));
                 ChatAction action = getChatAction(analyticsData.getValue("action"));
                 IOException ioException = analyticsData.getIoException();
+                Date accessTime = analyticsData.getAccessTime();
                 switch (methodName) {
                     case "getMe":
-                        jBotStats.onGettingMe(getUser(analyticsData.getReturned()), ioException);
+                        jBotStats.onGettingMe(getUser(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "getUserProfilePhotos":
-                        jBotStats.onGettingUserProfilePhotos(user_id, offset, limit, getUserProfilePhotos(analyticsData.getReturned()), ioException);
+                        jBotStats.onGettingUserProfilePhotos(user_id, offset, limit, getUserProfilePhotos(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "getFile":
-                        jBotStats.onGettingFile(file_id, getTelegramFile(analyticsData.getReturned()), ioException);
+                        jBotStats.onGettingFile(file_id, getTelegramFile(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "getUpdates":
-                        jBotStats.onReceivingUpdate(getUpdate(analyticsData.getReturned()), ioException);
+                        jBotStats.onReceivingUpdate(getUpdate(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "sendMessage":
-                        jBotStats.onSendingMessage(chat_id, text, parse_mode, disable_web_page_preview, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException);
+                        jBotStats.onSendingMessage(chat_id, text, parse_mode, disable_web_page_preview, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "forwardMessage":
-                        jBotStats.onForwardingMessage(chat_id, from_chat_id, message_id, getMessage(analyticsData.getReturned()), ioException);
+                        jBotStats.onForwardingMessage(chat_id, from_chat_id, message_id, getMessage(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "sendPhoto":
-                        jBotStats.onSendingPhoto(chat_id, photo, caption, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException);
+                        jBotStats.onSendingPhoto(chat_id, photo, caption, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "sendAudio":
-                        jBotStats.onSendingAudio(chat_id, audio, duration, performer, title, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException);
+                        jBotStats.onSendingAudio(chat_id, audio, duration, performer, title, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "sendDocument":
-                        jBotStats.onSendingDocument(chat_id, document, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException);
+                        jBotStats.onSendingDocument(chat_id, document, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "sendSticker":
-                        jBotStats.onSendingSticker(chat_id, sticker, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException);
+                        jBotStats.onSendingSticker(chat_id, sticker, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "sendVideo":
-                        jBotStats.onSendingVideo(chat_id, video, duration, caption, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException);
+                        jBotStats.onSendingVideo(chat_id, video, duration, caption, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "sendVoice":
-                        jBotStats.onSendingVoice(chat_id, voice, duration, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException);
+                        jBotStats.onSendingVoice(chat_id, voice, duration, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "sendLocation":
-                        jBotStats.onSendingLocation(chat_id, latitude, longitude, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException);
+                        jBotStats.onSendingLocation(chat_id, latitude, longitude, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "answerInlineQuery":
-                        jBotStats.onAnsweringInlineQuery(inline_query_id, results, next_offset, is_personal, cache_time, getBoolean(analyticsData.getReturned()), ioException);
+                        jBotStats.onAnsweringInlineQuery(inline_query_id, results, next_offset, is_personal, cache_time, getBoolean(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     case "sendChatAction":
-                        jBotStats.onSendingChatAction(chat_id, action, getBoolean(analyticsData.getReturned()), ioException);
+                        jBotStats.onSendingChatAction(chat_id, action, getBoolean(analyticsData.getReturned()), ioException, accessTime);
                         break;
                     default:
-                        jBotStats.onOtherData(analyticsData.getMethodName(), analyticsData.getObjectMap(), analyticsData.getReturned(), ioException);
+                        jBotStats.onOtherData(analyticsData.getMethodName(), analyticsData.getObjectMap(), analyticsData.getReturned(), ioException, accessTime);
                 }
             }
         }

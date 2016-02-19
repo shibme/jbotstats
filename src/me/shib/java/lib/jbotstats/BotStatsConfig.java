@@ -7,7 +7,7 @@ public class BotStatsConfig {
 
     private String botStatsClassName;
     private String token;
-    private Map<String, String> otherConfig;
+    private Map<String, String> botStatsConfig;
 
     public BotStatsConfig(Class<JBotStats> botStatsClass, String token) {
         this.botStatsClassName = botStatsClass.getName();
@@ -23,17 +23,17 @@ public class BotStatsConfig {
     }
 
     public void setConfig(String key, String value) {
-        if (otherConfig == null) {
-            otherConfig = new HashMap<>();
+        if (botStatsConfig == null) {
+            botStatsConfig = new HashMap<>();
         }
-        otherConfig.put(key, value);
+        botStatsConfig.put(key, value);
     }
 
     public String getConfig(String key) {
-        if (otherConfig == null) {
+        if (botStatsConfig == null) {
             return null;
         }
-        return otherConfig.get(key);
+        return botStatsConfig.get(key);
     }
 
 }

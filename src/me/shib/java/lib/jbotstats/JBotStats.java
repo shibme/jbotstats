@@ -24,6 +24,8 @@ public abstract class JBotStats {
         return botInfo;
     }
 
+    public abstract String getAnalyticsRedirectedURL(long user_id, String url);
+
     public abstract void onReceivingUpdate(Update update, IOException e, Date accessTime);
 
     public abstract void onGettingMe(User response, IOException e, Date accessTime);

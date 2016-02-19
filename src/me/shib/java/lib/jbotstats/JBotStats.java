@@ -9,13 +9,19 @@ import java.util.Map;
 public abstract class JBotStats {
 
     private BotStatsConfig botStatsConfig;
+    private User botInfo;
 
-    public JBotStats(BotStatsConfig botStatsConfig) {
+    public JBotStats(BotStatsConfig botStatsConfig, User botInfo) {
         this.botStatsConfig = botStatsConfig;
+        this.botInfo = botInfo;
     }
 
     public BotStatsConfig getBotStatsConfig() {
         return this.botStatsConfig;
+    }
+
+    public User getBotInfo() {
+        return botInfo;
     }
 
     public abstract void onReceivingUpdate(Update update, IOException e, Date accessTime);

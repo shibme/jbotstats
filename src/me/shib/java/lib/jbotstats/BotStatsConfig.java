@@ -6,22 +6,16 @@ import java.util.Map;
 public class BotStatsConfig {
 
     private String botStatsClassName;
-    private long botUserId;
+    private String token;
     private Map<String, String> otherConfig;
 
-    public BotStatsConfig(Class<JBotStats> botStatsClass, long botUserId) {
+    public BotStatsConfig(Class<JBotStats> botStatsClass, String token) {
         this.botStatsClassName = botStatsClass.getName();
-        this.botUserId = botUserId;
+        this.token = token;
     }
 
-    public long getBotUserId() {
-        return this.botUserId;
-    }
-
-    public void setBotUserId(long botUserId) {
-        if (botUserId > 0) {
-            this.botUserId = botUserId;
-        }
+    public String getToken() {
+        return token;
     }
 
     public String getBotStatsClassName() {

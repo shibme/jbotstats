@@ -3,7 +3,7 @@ package me.shib.java.lib.jbotstats;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class AnalyticsWorker {
+public final class AnalyticsWorker {
 
     private JBotStats jBotStats;
     private Queue<AnalyticsData> analyticsDataQueue;

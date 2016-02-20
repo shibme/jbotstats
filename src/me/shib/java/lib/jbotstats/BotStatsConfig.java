@@ -3,7 +3,7 @@ package me.shib.java.lib.jbotstats;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BotStatsConfig {
+public final class BotStatsConfig {
 
     private String botStatsClassName;
     private String token;

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AnalyticsData {
+public final class AnalyticsData {
 
     private Date accessTime;
     private String methodName;

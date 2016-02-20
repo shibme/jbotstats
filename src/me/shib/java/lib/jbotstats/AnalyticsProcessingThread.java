@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Queue;
 import java.util.logging.Logger;
 
-public class AnalyticsProcessingThread extends Thread {
+public final class AnalyticsProcessingThread extends Thread {
 
     private static final long waitBeforeEndInterval = 1000;
     private static final long maxCallBackCount = 7;

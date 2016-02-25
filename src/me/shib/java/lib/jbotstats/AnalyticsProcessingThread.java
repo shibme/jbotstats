@@ -177,7 +177,10 @@ public final class AnalyticsProcessingThread extends Thread {
         AnalyticsData analyticsData;
         while ((analyticsData = analyticsDataQueue.poll()) != null) {
             processedSomething = true;
-            String methodName = analyticsData.getMethodName();
+            boolean disable_web_page_preview = getBoolean(analyticsData.getValue("disable_web_page_preview"));
+            boolean disable_notification = getBoolean(analyticsData.getValue("disable_notification"));
+            boolean is_personal = getBoolean(analyticsData.getValue("is_personal"));
+            long reply_to_message_id = getLong(analyticsData.getValue("reply_to_message_id"));
             long message_id = getLong(analyticsData.getValue("message_id"));
             long user_id = getLong(analyticsData.getValue("user_id"));
             int offset = getInt(analyticsData.getValue("offset"));
@@ -186,20 +189,18 @@ public final class AnalyticsProcessingThread extends Thread {
             int cache_time = getInt(analyticsData.getValue("cache_time"));
             float latitude = getFloat(analyticsData.getValue("latitude"));
             float longitude = getFloat(analyticsData.getValue("longitude"));
+            String methodName = analyticsData.getMethodName();
             String inline_query_id = getString(analyticsData.getValue("inline_query_id"));
             String next_offset = getString(analyticsData.getValue("next_offset"));
             String file_id = getString(analyticsData.getValue("file_id"));
             String caption = getString(analyticsData.getValue("caption"));
             String title = getString(analyticsData.getValue("title"));
             String performer = getString(analyticsData.getValue("performer"));
-            ChatId chat_id = getChatId(analyticsData.getValue("chat_id"));
             String text = getString(analyticsData.getValue("parse_mode"));
-            ParseMode parse_mode = getParseMode(analyticsData.getValue("parse_mode"));
-            boolean disable_web_page_preview = getBoolean(analyticsData.getValue("disable_web_page_preview"));
-            boolean is_personal = getBoolean(analyticsData.getValue("is_personal"));
-            long reply_to_message_id = getLong(analyticsData.getValue("reply_to_message_id"));
-            ReplyMarkup reply_markup = getReplyMarkup(analyticsData.getValue("reply_markup"));
+            ChatId chat_id = getChatId(analyticsData.getValue("chat_id"));
             ChatId from_chat_id = getChatId(analyticsData.getValue("from_chat_id"));
+            ParseMode parse_mode = getParseMode(analyticsData.getValue("parse_mode"));
+            ReplyMarkup reply_markup = getReplyMarkup(analyticsData.getValue("reply_markup"));
             TelegramFile photo = getTelegramFile(analyticsData.getValue("photo"));
             TelegramFile audio = getTelegramFile(analyticsData.getValue("audio"));
             TelegramFile document = getTelegramFile(analyticsData.getValue("document"));
@@ -224,31 +225,31 @@ public final class AnalyticsProcessingThread extends Thread {
                     jBotStats.onReceivingUpdate(getUpdate(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "sendMessage":
-                    jBotStats.onSendingMessage(chat_id, text, parse_mode, disable_web_page_preview, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
+                    jBotStats.onSendingMessage(chat_id, text, disable_notification, parse_mode, disable_web_page_preview, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "forwardMessage":
-                    jBotStats.onForwardingMessage(chat_id, from_chat_id, message_id, getMessage(analyticsData.getReturned()), ioException, accessTime);
+                    jBotStats.onForwardingMessage(chat_id, from_chat_id, message_id, disable_notification, getMessage(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "sendPhoto":
-                    jBotStats.onSendingPhoto(chat_id, photo, caption, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
+                    jBotStats.onSendingPhoto(chat_id, photo, disable_notification, caption, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "sendAudio":
-                    jBotStats.onSendingAudio(chat_id, audio, duration, performer, title, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
+                    jBotStats.onSendingAudio(chat_id, audio, disable_notification, duration, performer, title, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "sendDocument":
-                    jBotStats.onSendingDocument(chat_id, document, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
+                    jBotStats.onSendingDocument(chat_id, document, disable_notification, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "sendSticker":
-                    jBotStats.onSendingSticker(chat_id, sticker, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
+                    jBotStats.onSendingSticker(chat_id, sticker, disable_notification, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "sendVideo":
-                    jBotStats.onSendingVideo(chat_id, video, duration, caption, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
+                    jBotStats.onSendingVideo(chat_id, video, disable_notification, duration, caption, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "sendVoice":
-                    jBotStats.onSendingVoice(chat_id, voice, duration, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
+                    jBotStats.onSendingVoice(chat_id, voice, disable_notification, duration, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "sendLocation":
-                    jBotStats.onSendingLocation(chat_id, latitude, longitude, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
+                    jBotStats.onSendingLocation(chat_id, latitude, longitude, disable_notification, reply_to_message_id, reply_markup, getMessage(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "answerInlineQuery":
                     jBotStats.onAnsweringInlineQuery(inline_query_id, results, next_offset, is_personal, cache_time, getBoolean(analyticsData.getReturned()), ioException, accessTime);

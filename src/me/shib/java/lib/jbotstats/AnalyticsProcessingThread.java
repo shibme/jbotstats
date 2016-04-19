@@ -1,6 +1,9 @@
 package me.shib.java.lib.jbotstats;
 
-import me.shib.java.lib.jtelebot.types.*;
+import me.shib.java.lib.jtelebot.models.inline.InlineQueryResult;
+import me.shib.java.lib.jtelebot.models.types.*;
+import me.shib.java.lib.jtelebot.models.updates.Message;
+import me.shib.java.lib.jtelebot.models.updates.Update;
 
 import java.io.IOException;
 import java.util.Date;
@@ -72,10 +75,20 @@ public final class AnalyticsProcessingThread extends Thread {
         return photos;
     }
 
-    private static TelegramFile getTelegramFile(Object object) {
-        TelegramFile telegramFile;
+    private static InputFile getInputFile(Object object) {
+        InputFile telegramFile;
         try {
-            telegramFile = (TelegramFile) object;
+            telegramFile = (InputFile) object;
+        } catch (Exception e) {
+            telegramFile = null;
+        }
+        return telegramFile;
+    }
+
+    private static TFile getTFile(Object object) {
+        TFile telegramFile;
+        try {
+            telegramFile = (TFile) object;
         } catch (Exception e) {
             telegramFile = null;
         }
@@ -201,12 +214,12 @@ public final class AnalyticsProcessingThread extends Thread {
             ChatId from_chat_id = getChatId(analyticsData.getValue("from_chat_id"));
             ParseMode parse_mode = getParseMode(analyticsData.getValue("parse_mode"));
             ReplyMarkup reply_markup = getReplyMarkup(analyticsData.getValue("reply_markup"));
-            TelegramFile photo = getTelegramFile(analyticsData.getValue("photo"));
-            TelegramFile audio = getTelegramFile(analyticsData.getValue("audio"));
-            TelegramFile document = getTelegramFile(analyticsData.getValue("document"));
-            TelegramFile sticker = getTelegramFile(analyticsData.getValue("sticker"));
-            TelegramFile video = getTelegramFile(analyticsData.getValue("video"));
-            TelegramFile voice = getTelegramFile(analyticsData.getValue("voice"));
+            InputFile photo = getInputFile(analyticsData.getValue("photo"));
+            InputFile audio = getInputFile(analyticsData.getValue("audio"));
+            InputFile document = getInputFile(analyticsData.getValue("document"));
+            InputFile sticker = getInputFile(analyticsData.getValue("sticker"));
+            InputFile video = getInputFile(analyticsData.getValue("video"));
+            InputFile voice = getInputFile(analyticsData.getValue("voice"));
             InlineQueryResult[] results = getInlineQueryResults(analyticsData.getValue("results"));
             ChatAction action = getChatAction(analyticsData.getValue("action"));
             IOException ioException = analyticsData.getIoException();
@@ -219,7 +232,7 @@ public final class AnalyticsProcessingThread extends Thread {
                     jBotStats.onGettingUserProfilePhotos(user_id, offset, limit, getUserProfilePhotos(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "getFile":
-                    jBotStats.onGettingFile(file_id, getTelegramFile(analyticsData.getReturned()), ioException, accessTime);
+                    jBotStats.onGettingFile(file_id, getTFile(analyticsData.getReturned()), ioException, accessTime);
                     break;
                 case "getUpdates":
                     jBotStats.onReceivingUpdate(getUpdate(analyticsData.getReturned()), ioException, accessTime);

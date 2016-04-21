@@ -5,7 +5,7 @@
 
     <groupId>me.shib.java.lib</groupId>
     <artifactId>jbotstats</artifactId>
-    <version>0.1.2</version>
+    <version>0.2.0</version>
     <name>JBotStats</name>
     <description>A java framework for creating Telegram Bots with less efforts</description>
     <url>https://github.com/shibme/jbotstats</url>

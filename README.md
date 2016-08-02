@@ -4,7 +4,7 @@
 [![Download](https://api.bintray.com/packages/shibme/maven/jbotstats/images/download.svg)](https://bintray.com/shibme/maven/jbotstats/_latestVersion)
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/shibme/jbotstats.svg)](http://isitmaintained.com/project/shibme/jbotstats "Percentage of issues still open")
 
-Analytics model library for bots created with JBots framework
+Analytics model library for telegram bots
 
 ### Maven Dependency for Consumers
 Add to your `pom.xml`

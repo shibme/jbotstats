@@ -5,7 +5,7 @@
 
     <groupId>me.shib.java.lib</groupId>
     <artifactId>jbotstats</artifactId>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
     <name>JBotStats</name>
     <description>Analytics model library for telegram bots</description>
     <url>https://github.com/shibme/jbotstats</url>
@@ -56,7 +56,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>3.7.0</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
@@ -78,7 +78,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -104,7 +104,7 @@
             <plugin>
                 <groupId>de.jutzig</groupId>
                 <artifactId>github-release-plugin</artifactId>
-                <version>1.1.1</version>
+                <version>1.2.0</version>
                 <executions>
                     <execution>
                         <id>github-upload</id>
@@ -148,7 +148,7 @@
         <dependency>
             <groupId>me.shib.java.lib</groupId>
             <artifactId>jtelebot</artifactId>
-            <version>2.1.0</version>
+            <version>2.1.2</version>
         </dependency>
     </dependencies>
 

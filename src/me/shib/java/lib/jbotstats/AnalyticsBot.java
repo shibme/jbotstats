@@ -6,7 +6,7 @@ import me.shib.java.lib.jtelebot.models.types.*;
 import me.shib.java.lib.jtelebot.models.updates.Message;
 import me.shib.java.lib.jtelebot.models.updates.Update;
 import me.shib.java.lib.jtelebot.service.TelegramBot;
-import me.shib.java.lib.restiny.HTTPFileDownloader;
+import me.shib.java.lib.utils.FileDownloader;
 
 import java.io.File;
 import java.io.IOException;
@@ -118,10 +118,10 @@ public final class AnalyticsBot extends TelegramBot {
     }
 
     @Override
-    public HTTPFileDownloader.DownloadProgress downloadToFile(String file_id, File downloadToFile, boolean waitForCompletion) throws IOException {
+    public FileDownloader.DownloadProgress downloadToFile(String file_id, File downloadToFile, boolean waitForCompletion) throws IOException {
         AnalyticsData data = new AnalyticsData("downloadToFile");
         IOException ioException = null;
-        HTTPFileDownloader.DownloadProgress progress = null;
+        FileDownloader.DownloadProgress progress = null;
         data.setValue("file_id", file_id);
         data.setValue("downloadToFile", downloadToFile);
         data.setValue("waitForCompletion", waitForCompletion);
